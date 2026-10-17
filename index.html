@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore nursing career opportunities at Siloam Hospital and submit your application online." />
+  <title>Careers | Siloam Hospital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #102b46;
+      --navy-deep: #0a1d31;
+      --teal: #0f9c91;
+      --teal-dark: #087d75;
+      --mint: #e7f6f3;
+      --sky: #eef5fa;
+      --ink: #1c2c3b;
+      --muted: #667788;
+      --line: #dce5eb;
+      --white: #ffffff;
+      --shadow: 0 18px 55px rgba(16, 43, 70, .10);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); font-family: "DM Sans", sans-serif; background: #fbfdfe; line-height: 1.6; }
+    h1,h2,h3,h4 { font-family: "Manrope", sans-serif; line-height: 1.15; color: var(--navy); margin: 0; }
+    p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    button,input,select,textarea { font: inherit; }
+    button { cursor: pointer; }
+    .container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .topbar { background: var(--navy-deep); color: #d8e7f1; font-size: .82rem; }
+    .topbar-inner { min-height: 38px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .topbar span { display: inline-flex; align-items: center; gap: 8px; }
+    .navbar { background: rgba(255,255,255,.96); border-bottom: 1px solid rgba(220,229,235,.8); position: sticky; top: 0; z-index: 20; backdrop-filter: blur(14px); }
+    .nav-inner { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: max-content; }
+    .brand-mark { width: 43px; height: 43px; border-radius: 14px; background: var(--teal); color: white; display: grid; place-items: center; box-shadow: 0 8px 20px rgba(15,156,145,.25); }
+    .brand-mark svg { width: 26px; height: 26px; }
+    .brand-name { display: block; color: var(--navy); font-family: "Manrope", sans-serif; font-weight: 800; font-size: 1.12rem; letter-spacing: -.04em; }
+    .brand-tagline { display: block; color: var(--muted); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #415366; font-size: .93rem; font-weight: 600; }
+    .nav-links a:hover,.nav-links a.active { color: var(--teal-dark); }
+    .btn { border: 0; border-radius: 10px; padding: 13px 20px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-weight: 700; transition: .2s ease; }
+    .btn-primary { color: white; background: var(--teal); box-shadow: 0 9px 20px rgba(15,156,145,.19); }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
+    .btn-outline { border: 1px solid #c8d8e2; color: var(--navy); background: white; }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal-dark); }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: white; border-radius: 10px; padding: 9px 12px; color: var(--navy); }
+    .hero { position: relative; overflow: hidden; background: var(--navy); color: white; }
+    .hero::before { content: ""; position: absolute; width: 520px; height: 520px; border: 1px solid rgba(255,255,255,.10); border-radius: 50%; right: -120px; top: -240px; box-shadow: 0 0 0 65px rgba(255,255,255,.025), 0 0 0 130px rgba(255,255,255,.02); }
+    .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; gap: 55px; align-items: center; padding-top: 76px; padding-bottom: 82px; position: relative; z-index: 1; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #a8eee4; text-transform: uppercase; font-size: .75rem; font-weight: 800; letter-spacing: .15em; margin-bottom: 20px; }
+    .eyebrow::before { content: ""; width: 25px; height: 2px; background: var(--teal); }
+    .hero h1 { color: white; font-size: clamp(2.5rem, 4.4vw, 4.4rem); letter-spacing: -.055em; max-width: 680px; }
+    .hero h1 em { color: #74d9cf; font-style: normal; }
+    .hero-copy { color: #d0deea; font-size: 1.06rem; max-width: 560px; margin: 23px 0 30px; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 13px; flex-wrap: wrap; }
+    .hero .btn-outline { color: white; border-color: rgba(255,255,255,.35); background: transparent; }
+    .hero .btn-outline:hover { background: rgba(255,255,255,.08); border-color: white; }
+    .hero-note { display: flex; align-items: center; gap: 12px; color: #d0deea; margin-top: 29px; font-size: .85rem; }
+    .avatar-stack { display: flex; padding-left: 5px; }
+    .avatar-stack span { width: 31px; height: 31px; border-radius: 50%; border: 2px solid var(--navy); margin-left: -6px; background: #c9e6e2; display: grid; place-items: center; color: var(--navy); font-size: .65rem; font-weight: 800; }
+    .hero-visual { min-height: 455px; position: relative; }
+    .hero-photo { position: absolute; inset: 0 15px 25px 25px; overflow: hidden; border-radius: 28px; background: #d8e7ec; }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .photo-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,29,49,0) 50%, rgba(8,29,49,.6)); }
+    .image-caption { position: absolute; bottom: 24px; left: 25px; right: 25px; color: white; }
+    .image-caption strong { display: block; font-family: "Manrope", sans-serif; font-size: 1.1rem; }
+    .image-caption span { font-size: .82rem; color: #e0edf3; }
+    .floating-card { position: absolute; right: -4px; top: 36px; background: white; color: var(--navy); border-radius: 16px; padding: 16px 18px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 12px; max-width: 210px; }
+    .floating-icon { background: var(--mint); color: var(--teal-dark); width: 43px; height: 43px; border-radius: 12px; display: grid; place-items: center; font-size: 1.3rem; }
+    .floating-card strong { display: block; font-family: "Manrope", sans-serif; font-size: .91rem; }
+    .floating-card small { color: var(--muted); font-size: .74rem; }
+    .trust-strip { background: white; border-bottom: 1px solid var(--line); }
+    .trust-grid { display: grid; grid-template-columns: repeat(4,1fr); padding: 23px 0; gap: 20px; }
+    .trust-item { display: flex; align-items: center; justify-content: center; gap: 11px; color: #405467; font-weight: 700; font-size: .89rem; }
+    .trust-item span { color: var(--teal); font-size: 1.25rem; }
+    section { padding: 88px 0; }
+    .section-head { max-width: 690px; margin-bottom: 42px; }
+    .section-label { color: var(--teal-dark); font-weight: 800; text-transform: uppercase; letter-spacing: .13em; font-size: .74rem; margin-bottom: 14px; display: block; }
+    .section-head h2 { font-size: clamp(2rem, 3.2vw, 3rem); letter-spacing: -.045em; margin-bottom: 16px; }
+    .section-head p { color: var(--muted); font-size: 1.02rem; line-height: 1.8; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; align-items: center; }
+    .about-photo { min-height: 470px; border-radius: 24px; overflow: hidden; position: relative; background: var(--sky); }
+    .about-photo img { width: 100%; height: 100%; min-height: 470px; object-fit: cover; display: block; }
+    .about-badge { position: absolute; bottom: 22px; left: 22px; background: white; padding: 17px 20px; border-radius: 14px; box-shadow: var(--shadow); max-width: 250px; }
+    .about-badge strong { display: block; font-family: "Manrope", sans-serif; font-size: 1rem; color: var(--navy); }
+    .about-badge span { color: var(--muted); font-size: .8rem; }
+    .values-list { display: grid; gap: 18px; margin-top: 28px; }
+    .value-row { display: flex; gap: 15px; }
+    .value-icon { flex: 0 0 45px; width: 45px; height: 45px; border-radius: 13px; background: var(--mint); display: grid; place-items: center; color: var(--teal-dark); font-size: 1.2rem; }
+    .value-row h3 { font-size: 1rem; margin: 2px 0 5px; }
+    .value-row p { color: var(--muted); font-size: .91rem; line-height: 1.65; }
+    .mission-section { background: var(--sky); }
+    .mission-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .mission-card { background: white; border: 1px solid #e2ebf0; border-radius: 18px; padding: 29px; min-height: 245px; transition: .2s ease; }
+    .mission-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .mission-card .card-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; color: var(--teal-dark); background: var(--mint); font-size: 1.35rem; margin-bottom: 24px; }
+    .mission-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
+    .mission-card p { color: var(--muted); font-size: .93rem; line-height: 1.8; }
+    .culture-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 60px; align-items: center; }
+    .culture-image { border-radius: 24px; overflow: hidden; height: 450px; }
+    .culture-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .culture-points { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 28px; }
+    .culture-point { padding-top: 17px; border-top: 1px solid var(--line); }
+    .culture-point strong { display: block; color: var(--navy); margin-bottom: 6px; }
+    .culture-point span { color: var(--muted); font-size: .88rem; line-height: 1.65; }
+    .jobs-section { background: var(--navy); color: white; }
+    .jobs-section h2 { color: white; }
+    .jobs-section .section-head p { color: #c4d4e1; }
+    .jobs-layout { display: grid; grid-template-columns: 1fr 1.05fr; gap: 30px; align-items: stretch; }
+    .job-feature { border-radius: 22px; overflow: hidden; position: relative; min-height: 390px; background: #1b4c66; }
+    .job-feature img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; opacity: .68; }
+    .job-feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(9,29,49,.05), rgba(9,29,49,.9)); }
+    .job-feature-content { position: absolute; z-index: 1; bottom: 28px; left: 28px; right: 28px; }
+    .job-feature-content .pill { display: inline-block; background: rgba(116,217,207,.18); color: #b6fff4; border: 1px solid rgba(182,255,244,.35); padding: 6px 10px; border-radius: 50px; font-size: .74rem; font-weight: 800; margin-bottom: 15px; }
+    .job-feature-content h3 { color: white; font-size: 1.8rem; margin-bottom: 10px; }
+    .job-feature-content p { color: #d7e5ed; margin-bottom: 18px; }
+    .job-list { display: grid; gap: 13px; }
+    .job-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 15px; padding: 20px; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .job-card h3 { color: white; font-size: 1rem; margin-bottom: 6px; }
+    .job-card p { color: #b9cbd8; font-size: .82rem; }
+    .job-card .arrow { width: 39px; height: 39px; border-radius: 50%; background: rgba(116,217,207,.14); color: #8de4db; display: grid; place-items: center; flex: 0 0 auto; }
+    .job-note { color: #b9cbd8; font-size: .82rem; margin-top: 14px; }
+    .process-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; counter-reset: step; }
+    .process-card { border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+    .process-card::before { counter-increment: step; content: "0" counter(step); display: block; color: var(--teal-dark); font-family: "Manrope",sans-serif; font-size: 1.6rem; font-weight: 800; margin-bottom: 22px; }
+    .process-card h3 { font-size: 1rem; margin-bottom: 9px; }
+    .process-card p { color: var(--muted); font-size: .88rem; line-height: 1.7; }
+    .cta-section { padding-top: 0; }
+    .cta-box { background: var(--mint); border-radius: 24px; padding: 42px 48px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .cta-box h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 12px; }
+    .cta-box p { color: #526a78; max-width: 590px; }
+    footer { background: var(--navy-deep); color: #c5d4df; padding: 42px 0 25px; }
+    .footer-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 35px; padding-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    footer .brand-name { color: white; }
+    footer .brand-tagline { color: #a9bdcc; }
+    .footer-copy { max-width: 360px; color: #a9bdcc; font-size: .87rem; margin-top: 16px; }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; font-size: .87rem; }
+    .footer-links a:hover { color: #8de4db; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 15px; padding-top: 22px; font-size: .78rem; color: #8fa7b9; }
+    .disclaimer { font-size: .78rem; color: #8fa7b9; max-width: 540px; text-align: right; }
+
+    /* Application page */
+    .application-hero { background: linear-gradient(120deg, var(--navy), #174b63); color: white; padding: 55px 0; }
+    .application-hero h1 { color: white; font-size: clamp(2.1rem, 4vw, 3.4rem); letter-spacing: -.045em; }
+    .application-hero p { color: #d0e0e9; max-width: 700px; margin-top: 14px; line-height: 1.8; }
+    .breadcrumb { font-size: .82rem; color: #a9c1d0; margin-bottom: 18px; }
+    .breadcrumb a { color: #a8eee4; }
+    .application-wrap { padding: 52px 0 80px; background: #f5f8fa; }
+    .application-layout { display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: 26px; align-items: start; }
+    .form-card,.sidebar-card { background: white; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 8px 30px rgba(16,43,70,.04); }
+    .form-card { padding: 34px; }
+    .form-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding-bottom: 25px; border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+    .form-heading h2 { font-size: 1.45rem; margin-bottom: 8px; }
+    .form-heading p { color: var(--muted); font-size: .9rem; }
+    .required-note { color: var(--muted); font-size: .78rem; white-space: nowrap; }
+    .form-section { margin-bottom: 34px; }
+    .form-section h3 { font-size: 1.03rem; padding-bottom: 13px; border-bottom: 1px solid #edf1f4; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .form-section h3 span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; background: var(--mint); color: var(--teal-dark); font-size: .8rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 19px 18px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field.full { grid-column: 1/-1; }
+    label { color: #35495a; font-size: .85rem; font-weight: 700; }
+    label .optional { color: #8393a0; font-weight: 400; }
+    input,select,textarea { width: 100%; border: 1px solid #d3dee6; border-radius: 9px; background: #fff; color: var(--ink); padding: 12px 13px; outline: none; transition: .15s; }
+    input:focus,select:focus,textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(15,156,145,.11); }
+    input::placeholder,textarea::placeholder { color: #9aa8b3; }
+    textarea { min-height: 115px; resize: vertical; }
+    .hint { color: #81909b; font-size: .75rem; }
+    .upload-box { border: 1.5px dashed #bdcdd7; border-radius: 12px; padding: 18px; background: #fbfdfe; }
+    .upload-box input { padding: 8px; border: 0; background: transparent; }
+    .upload-box small { display: block; color: var(--muted); margin-top: 7px; }
+    .checkbox-row { display: flex; align-items: flex-start; gap: 10px; margin: 17px 0 22px; }
+    .checkbox-row input { width: 17px; height: 17px; margin-top: 4px; flex: 0 0 auto; accent-color: var(--teal); }
+    .checkbox-row label { font-weight: 500; color: #526473; line-height: 1.65; }
+    .form-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--line); }
+    .form-status { display: none; border-radius: 10px; padding: 14px 16px; margin-bottom: 22px; font-size: .9rem; }
+    .form-status.success { display: block; background: #e8f8ef; color: #17683c; border: 1px solid #bde8cd; }
+    .form-status.warning { display: block; background: #fff6e6; color: #7b4e0c; border: 1px solid #f3d59e; }
+    .sidebar { display: grid; gap: 18px; }
+    .sidebar-card { padding: 24px; }
+    .sidebar-card h3 { font-size: 1rem; margin-bottom: 13px; }
+    .sidebar-card p { color: var(--muted); font-size: .86rem; line-height: 1.75; }
+    .sidebar-list { display: grid; gap: 14px; margin-top: 18px; }
+    .sidebar-list div { display: flex; align-items: flex-start; gap: 10px; font-size: .84rem; color: #526473; }
+    .sidebar-list span { color: var(--teal-dark); }
+    .privacy-card { background: var(--navy); color: white; }
+    .privacy-card h3 { color: white; }
+    .privacy-card p { color: #c5d5e0; }
+    .privacy-card .privacy-icon { font-size: 1.6rem; margin-bottom: 13px; }
+    .hidden { display: none !important; }
+    .mobile-only { display: none; }
+
+    @media (max-width: 900px) {
+      .nav-links { gap: 17px; }
+      .hero-grid { grid-template-columns: 1fr .85fr; gap: 25px; }
+      .hero-visual { min-height: 390px; }
+      .about-grid,.culture-grid { gap: 32px; }
+      .jobs-layout { grid-template-columns: 1fr; }
+      .job-feature { min-height: 330px; }
+      .application-layout { grid-template-columns: 1fr; }
+      .sidebar { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .container { width: min(100% - 30px, 1160px); }
+      .topbar-inner { justify-content: center; min-height: 34px; }
+      .topbar-inner span:last-child { display: none; }
+      .nav-inner { min-height: 72px; flex-wrap: wrap; }
+      .menu-toggle { display: block; }
+      .nav-links { display: none; order: 3; width: 100%; flex-direction: column; align-items: stretch; gap: 0; padding: 4px 0 16px; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 4px; border-top: 1px solid #edf1f4; }
+      .nav-inner > .btn { display: none; }
+      .hero-grid { grid-template-columns: 1fr; padding-top: 52px; padding-bottom: 54px; }
+      .hero h1 { font-size: 2.65rem; }
+      .hero-visual { min-height: 360px; margin-top: 10px; }
+      .hero-photo { inset: 0 10px 18px 0; }
+      .floating-card { right: 0; top: 20px; }
+      .trust-grid { grid-template-columns: 1fr 1fr; gap: 18px 10px; }
+      .trust-item { justify-content: flex-start; font-size: .8rem; }
+      section { padding: 62px 0; }
+      .about-grid,.culture-grid { grid-template-columns: 1fr; }
+      .about-photo,.about-photo img { min-height: 330px; }
+      .culture-image { height: 320px; }
+      .mission-cards { grid-template-columns: 1fr; }
+      .mission-card { min-height: auto; }
+      .culture-points { gap: 18px 14px; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .cta-box { padding: 30px 24px; align-items: flex-start; flex-direction: column; }
+      .footer-top,.footer-bottom { flex-direction: column; }
+      .disclaimer { text-align: left; }
+      .form-card { padding: 23px 18px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .form-heading { flex-direction: column; }
+      .required-note { white-space: normal; }
+      .sidebar { grid-template-columns: 1fr; }
+      .application-hero { padding: 42px 0; }
+      .form-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>✦ &nbsp; Careers that care. People who make a difference.</span>
+      <span>Recruitment portal · Siloam Hospital</span>
+    </div>
+  </div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#" data-page="home" aria-label="Siloam Hospital careers home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M13 4h6v9h9v6h-9v9h-6v-9H4v-6h9V4Z" fill="currentColor"/></svg>
+        </span>
+        <span><span class="brand-name">Siloam Hospital</span><span class="brand-tagline">Careers & Opportunities</span></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about" data-home-anchor="about">About us</a>
+        <a href="#culture" data-home-anchor="culture">Our culture</a>
+        <a href="#opportunities" data-home-anchor="opportunities">Opportunities</a>
+        <a href="#" data-page="application" class="mobile-only">Nursing application</a>
+      </nav>
+      <a class="btn btn-primary" href="#" data-page="application">Apply for a role <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main id="homePage">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Your calling. Your next chapter.</div>
+          <h1>Make care your <em>career.</em></h1>
+          <p class="hero-copy">Join a team committed to compassionate care, professional growth and the dignity of every patient. Bring your skill, your curiosity and your heart to work that matters.</p>
+          <div class="hero-actions">
+            <a href="#" class="btn btn-primary" data-page="application">Explore nursing roles <span aria-hidden="true">→</span></a>
+            <a href="#about" class="btn btn-outline">Discover Siloam</a>
+          </div>
+          <div class="hero-note">
+            <div class="avatar-stack" aria-hidden="true"><span>RN</span><span>✚</span><span>HC</span></div>
+            <span>A workplace built around people, teamwork and learning.</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-photo">
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=1100&q=85" alt="Healthcare professional in a clinical setting">
+            <div class="photo-shade"></div>
+            <div class="image-caption"><strong>Care with purpose.</strong><span>Every patient. Every colleague. Every day.</span></div>
+          </div>
+          <div class="floating-card"><span class="floating-icon">♡</span><span><strong>People first</strong><small>Care, respect and teamwork</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item"><span>✚</span> Patient-centred care</div>
+        <div class="trust-item"><span>♧</span> Continuous learning</div>
+        <div class="trust-item"><span>◎</span> Respectful teamwork</div>
+        <div class="trust-item"><span>↗</span> Meaningful impact</div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="about-photo">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85" alt="Healthcare team collaborating in a hospital">
+          <div class="about-badge"><strong>Better care starts with people.</strong><span>Supporting the people who support our patients.</span></div>
+        </div>
+        <div>
+          <span class="section-label">About Siloam Hospital</span>
+          <div class="section-head" style="margin-bottom:0">
+            <h2>Where skill meets compassion.</h2>
+            <p>This careers portal introduces Siloam Hospital as a place where quality healthcare and a supportive team culture belong together. We welcome professionals who bring integrity, empathy and a commitment to safe, respectful care.</p>
+          </div>
+          <div class="values-list">
+            <div class="value-row"><div class="value-icon">♡</div><div><h3>Compassion in every interaction</h3><p>We aim to treat patients, families and colleagues with empathy, dignity and respect.</p></div></div>
+            <div class="value-row"><div class="value-icon">✚</div><div><h3>Quality and patient safety</h3><p>We value responsible practice, teamwork and continuous improvement in the care we provide.</p></div></div>
+            <div class="value-row"><div class="value-icon">↗</div><div><h3>Growth with purpose</h3><p>We encourage learning, knowledge-sharing and professional development across our teams.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-label">What guides us</span>
+          <h2>Our purpose, our promise.</h2>
+          <p>The statements below are proposed website copy for the hospital to review and approve before publication.</p>
+        </div>
+        <div class="mission-cards">
+          <article class="mission-card"><div class="card-icon">◎</div><h3>Our vision</h3><p>To be a trusted healthcare provider recognised for compassionate service, clinical excellence and a positive impact on the communities we serve.</p></article>
+          <article class="mission-card"><div class="card-icon">✚</div><h3>Our mission</h3><p>To deliver safe, accessible and patient-centred healthcare through skilled professionals, responsible practice and continuous improvement.</p></article>
+          <article class="mission-card"><div class="card-icon">♡</div><h3>Our values</h3><p>Compassion, integrity, respect, accountability, teamwork and a commitment to learning guide how we care for patients and work with one another.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="culture">
+      <div class="container culture-grid">
+        <div>
+          <span class="section-label">Life at Siloam</span>
+          <div class="section-head" style="margin-bottom:0">
+            <h2>A team where people can do their best work.</h2>
+            <p>Excellent care depends on the people delivering it. Our intended staff culture is grounded in mutual respect, open communication and shared responsibility.</p>
+          </div>
+          <div class="culture-points">
+            <div class="culture-point"><strong>Respect & inclusion</strong><span>A professional environment where every team member is treated with dignity.</span></div>
+            <div class="culture-point"><strong>Team collaboration</strong><span>Clear communication across clinical and support teams.</span></div>
+            <div class="culture-point"><strong>Learning mindset</strong><span>Opportunities to develop skills and share knowledge.</span></div>
+            <div class="culture-point"><strong>Patient safety</strong><span>Thoughtful practice, accountability and quality improvement.</span></div>
+          </div>
+        </div>
+        <div class="culture-image"><img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=1000&q=85" alt="Nurse and medical colleague working together"></div>
+      </div>
+    </section>
+
+    <section class="jobs-section" id="opportunities">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-label">Career opportunities</span>
+          <h2>Bring your expertise. Make a difference.</h2>
+          <p>Start with our nursing application form. Applicants for other departments can be added to this portal as new vacancies are approved.</p>
+        </div>
+        <div class="jobs-layout">
+          <div class="job-feature">
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1100&q=85" alt="Nurse providing care in a clinical environment">
+            <div class="job-feature-content"><span class="pill">Featured career pathway</span><h3>Nursing & Clinical Care</h3><p>For qualified, compassionate professionals who put safe and respectful patient care first.</p><a href="#" data-page="application" class="btn btn-primary">Apply for nursing <span>→</span></a></div>
+          </div>
+          <div>
+            <div class="job-list">
+              <a href="#" class="job-card" data-page="application"><div><h3>Registered Nurse (RN)</h3><p>Patient assessment · Care planning · Clinical teamwork</p></div><span class="arrow">↗</span></a>
+              <a href="#" class="job-card" data-page="application"><div><h3>Enrolled Nurse</h3><p>Quality bedside care · Patient support · Documentation</p></div><span class="arrow">↗</span></a>
+              <a href="#" class="job-card" data-page="application"><div><h3>Nursing Officer / Specialist Nurse</h3><p>Clinical leadership · Specialist practice · Mentorship</p></div><span class="arrow">↗</span></a>
+              <a href="#" class="job-card" data-page="application"><div><h3>Graduate / Internship Interest</h3><p>For eligible candidates seeking supervised experience</p></div><span class="arrow">↗</span></a>
+            </div>
+            <p class="job-note">These are sample role categories for the website design, not confirmation of current vacancies. Please replace them with approved openings and requirements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <span class="section-label">The application journey</span>
+          <h2>Clear, simple and professional.</h2>
+          <p>We want applicants to know what to expect at each stage.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-card"><h3>Submit your details</h3><p>Complete the application form and provide accurate contact and qualification details.</p></article>
+          <article class="process-card"><h3>Application review</h3><p>The recruitment team reviews submissions against the role's published requirements.</p></article>
+          <article class="process-card"><h3>Shortlisting</h3><p>Applicants selected to progress may be contacted for documents, interviews or assessments.</p></article>
+          <article class="process-card"><h3>Next steps</h3><p>Successful candidates receive further guidance on verification and onboarding.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box"><div><h2>Ready to take the next step?</h2><p>Tell us about your training, experience and the care you want to bring to our team.</p></div><a href="#" data-page="application" class="btn btn-primary">Start your application <span>→</span></a></div>
+      </div>
+    </section>
+  </main>
+
+  <main id="applicationPage" class="hidden">
+    <section class="application-hero">
+      <div class="container">
+        <div class="breadcrumb"><a href="#" data-page="home">Home</a> &nbsp; / &nbsp; Nursing application</div>
+        <span class="eyebrow">Join our clinical team</span>
+        <h1>Nursing job application</h1>
+        <p>Use this form to share your professional background and apply for a nursing opportunity at Siloam Hospital. Complete all required fields carefully. Fields marked with * are required.</p>
+      </div>
+    </section>
+    <section class="application-wrap">
+      <div class="container application-layout">
+        <div class="form-card">
+          <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+          <div class="form-heading">
+            <div><h2>Application form</h2><p>Personal information, qualifications and professional experience.</p></div>
+            <span class="required-note">* Required field</span>
+          </div>
+          <form id="nursingForm">
+            <div class="form-section">
+              <h3><span>1</span> Personal information</h3>
+              <div class="form-grid">
+                <div class="field"><label for="firstName">First name *</label><input id="firstName" name="firstName" autocomplete="given-name" required placeholder="e.g. Amina"></div>
+                <div class="field"><label for="lastName">Last name *</label><input id="lastName" name="lastName" autocomplete="family-name" required placeholder="e.g. Otieno"></div>
+                <div class="field"><label for="dob">Date of birth *</label><input id="dob" name="dob" type="date" required></div>
+                <div class="field"><label for="gender">Gender <span class="optional">(optional)</span></label><select id="gender" name="gender"><option value="">Prefer not to say</option><option>Female</option><option>Male</option><option>Another identity</option></select></div>
+                <div class="field"><label for="email">Email address *</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"></div>
+                <div class="field"><label for="phone">Phone number *</label><input id="phone" name="phone" type="tel" autocomplete="tel" required placeholder="+254 7XX XXX XXX"></div>
+                <div class="field"><label for="county">County / Town *</label><input id="county" name="county" required placeholder="e.g. Kisumu"></div>
+                <div class="field"><label for="nationality">Nationality *</label><input id="nationality" name="nationality" required placeholder="e.g. Kenyan"></div>
+              </div>
+            </div>
+            <div class="form-section">
+              <h3><span>2</span> Position details</h3>
+              <div class="form-grid">
+                <div class="field"><label for="role">Position applied for *</label><select id="role" name="role" required><option value="">Select a position</option><option>Registered Nurse (RN)</option><option>Enrolled Nurse</option><option>Nursing Officer / Specialist Nurse</option><option>Graduate / Internship Interest</option><option>Other nursing position</option></select></div>
+                <div class="field"><label for="employment">Employment type preferred *</label><select id="employment" name="employment" required><option value="">Select employment type</option><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship / supervised placement</option><option>Any suitable opportunity</option></select></div>
+                <div class="field"><label for="startDate">Earliest available start date *</label><input id="startDate" name="startDate" type="date" required></div>
+                <div class="field"><label for="workStatus">Current professional status *</label><select id="workStatus" name="workStatus" required><option value="">Select status</option><option>Currently employed</option><option>Not currently employed</option><option>Recent graduate</option><option>Intern / trainee</option><option>Other</option></select></div>
+              </div>
+            </div>
+            <div class="form-section">
+              <h3><span>3</span> Education & professional registration</h3>
+              <div class="form-grid">
+                <div class="field"><label for="qualification">Highest nursing qualification *</label><select id="qualification" name="qualification" required><option value="">Select qualification</option><option>Certificate in Nursing</option><option>Diploma in Nursing</option><option>Bachelor of Science in Nursing</option><option>Postgraduate / Master's qualification</option><option>Other relevant qualification</option></select></div>
+                <div class="field"><label for="institution">Training institution *</label><input id="institution" name="institution" required placeholder="Name of college or university"></div>
+                <div class="field"><label for="graduationYear">Year completed *</label><input id="graduationYear" name="graduationYear" type="number" min="1960" max="2100" required placeholder="e.g. 2023"></div>
+                <div class="field"><label for="registration">Nursing council registration / licence number *</label><input id="registration" name="registration" required placeholder="Enter registration number"></div>
+                <div class="field"><label for="licenceStatus">Registration / licence status *</label><select id="licenceStatus" name="licenceStatus" required><option value="">Select status</option><option>Current and valid</option><option>Renewal in progress</option><option>Awaiting registration / licensing</option><option>Not applicable — explain below</option></select></div>
+                <div class="field"><label for="licenceExpiry">Licence expiry date <span class="optional">(if applicable)</span></label><input id="licenceExpiry" name="licenceExpiry" type="date"></div>
+                <div class="field full"><label for="certifications">Additional certifications <span class="optional">(optional)</span></label><textarea id="certifications" name="certifications" placeholder="e.g. BLS, ACLS, emergency care, wound care, neonatal care"></textarea></div>
+              </div>
+            </div>
+            <div class="form-section">
+              <h3><span>4</span> Work experience</h3>
+              <div class="form-grid">
+                <div class="field"><label for="experience">Years of nursing experience *</label><select id="experience" name="experience" required><option value="">Select experience</option><option>No formal experience / recent graduate</option><option>Less than 1 year</option><option>1–2 years</option><option>3–5 years</option><option>6–10 years</option><option>More than 10 years</option></select></div>
+                <div class="field"><label for="currentEmployer">Current / most recent employer <span class="optional">(optional)</span></label><input id="currentEmployer" name="currentEmployer" placeholder="Hospital, clinic or organisation"></div>
+                <div class="field"><label for="department">Clinical area of experience *</label><select id="department" name="department" required><option value="">Select clinical area</option><option>Medical / Surgical Ward</option><option>Emergency / Casualty</option><option>Critical Care / ICU</option><option>Maternity / Labour Ward</option><option>Paediatrics / Neonatal</option><option>Outpatient Department</option><option>Operating Theatre</option><option>Community Health</option><option>Multiple clinical areas</option><option>Not yet experienced / newly qualified</option><option>Other</option></select></div>
+                <div class="field"><label for="notice">Notice period <span class="optional">(if currently employed)</span></label><select id="notice" name="notice"><option value="">Select notice period</option><option>Immediately available</option><option>1–2 weeks</option><option>1 month</option><option>More than 1 month</option><option>Other</option></select></div>
+                <div class="field full"><label for="responsibilities">Briefly describe your relevant experience *</label><textarea id="responsibilities" name="responsibilities" required placeholder="Describe your clinical duties, patient groups, key skills and relevant achievements."></textarea></div>
+                <div class="field full"><label for="motivation">Why would you like to join Siloam Hospital? *</label><textarea id="motivation" name="motivation" required placeholder="Tell us what you would bring to the team and what matters to you in patient care."></textarea></div>
+              </div>
+            </div>
+            <div class="form-section">
+              <h3><span>5</span> Supporting documents</h3>
+              <div class="form-grid">
+                <div class="field full"><label for="cv">Curriculum Vitae (CV) *</label><div class="upload-box"><input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" required><small>PDF or Word document. Suggested maximum: 5 MB.</small></div></div>
+                <div class="field full"><label for="coverLetter">Cover letter <span class="optional">(optional)</span></label><div class="upload-box"><input id="coverLetter" name="coverLetter" type="file" accept=".pdf,.doc,.docx"><small>PDF or Word document. Suggested maximum: 5 MB.</small></div></div>
+                <div class="field full"><label for="documents">Other supporting documents <span class="optional">(optional)</span></label><div class="upload-box"><input id="documents" name="documents" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple><small>For example: certificates, registration evidence or testimonials. Upload only documents requested by the hospital.</small></div></div>
+              </div>
+            </div>
+            <div class="form-section">
+              <h3><span>6</span> Declaration</h3>
+              <div class="checkbox-row"><input id="accuracy" name="accuracy" type="checkbox" required><label for="accuracy">I confirm that the information provided in this application is accurate and complete to the best of my knowledge. I understand that material misrepresentation may affect my application. *</label></div>
+              <div class="checkbox-row"><input id="privacyConsent" name="privacyConsent" type="checkbox" required><label for="privacyConsent">I consent to Siloam Hospital using the information I provide to assess my application and contact me about recruitment, in accordance with applicable data-protection requirements. *</label></div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Submit application <span aria-hidden="true">→</span></button>
+              <button class="btn btn-outline" type="reset">Clear form</button>
+            </div>
+            <p class="hint" style="margin-top:15px">Demo notice: this standalone page does not transmit applications or upload documents. Connect it to a secure backend or approved form service before accepting real applicants.</p>
+          </form>
+        </div>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Before you apply</h3>
+            <p>Prepare the details below so you can complete the form accurately.</p>
+            <div class="sidebar-list">
+              <div><span>✓</span><span>Updated CV with current contact information</span></div>
+              <div><span>✓</span><span>Nursing qualification and training details</span></div>
+              <div><span>✓</span><span>Professional registration / licence information</span></div>
+              <div><span>✓</span><span>Relevant clinical experience and certifications</span></div>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <h3>Our recruitment approach</h3>
+            <p>We aim to assess applications fairly against role requirements, professional qualifications and the needs of the hospital. Only shortlisted candidates should be contacted for the next stage.</p>
+          </div>
+          <div class="sidebar-card privacy-card">
+            <div class="privacy-icon">▣</div><h3>Your information matters.</h3><p>Recruitment data should be handled confidentially and accessed only by authorised staff. A live version must use secure storage, appropriate retention rules and a published privacy notice.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="#" data-page="home">
+            <span class="brand-mark"><svg viewBox="0 0 32 32" fill="none"><path d="M13 4h6v9h9v6h-9v9h-6v-9H4v-6h9V4Z" fill="currentColor"/></svg></span>
+            <span><span class="brand-name">Siloam Hospital</span><span class="brand-tagline">Careers & Opportunities</span></span>
+          </a>
+          <p class="footer-copy">A proposed recruitment website concept focused on compassionate care, professional growth and a positive patient experience.</p>
+        </div>
+        <div class="footer-links"><a href="#" data-page="home">Home</a><a href="#about" data-home-anchor="about">About us</a><a href="#culture" data-home-anchor="culture">Our culture</a><a href="#" data-page="application">Nursing application</a></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> Siloam Hospital · Careers portal concept</span><span class="disclaimer">Please verify hospital details, contact information, vacancies, vision and mission before publishing.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const homePage = document.getElementById('homePage');
+    const applicationPage = document.getElementById('applicationPage');
+    const navLinks = document.getElementById('navLinks');
+    const menuToggle = document.getElementById('menuToggle');
+
+    function showPage(page) {
+      const isApplication = page === 'application';
+      homePage.classList.toggle('hidden', isApplication);
+      applicationPage.classList.toggle('hidden', !isApplication);
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.title = isApplication ? 'Nursing Application | Siloam Hospital' : 'Careers | Siloam Hospital';
+    }
+
+    document.querySelectorAll('[data-page]').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        showPage(link.dataset.page);
+      });
+    });
+
+    document.querySelectorAll('[data-home-anchor]').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        showPage('home');
+        const target = document.getElementById(link.dataset.homeAnchor);
+        setTimeout(() => target?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+      });
+    });
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Browser-side demo only: no application data is sent or saved.
+    const form = document.getElementById('nursingForm');
+    const statusBox = document.getElementById('formStatus');
+    const fileInputs = ['cv', 'coverLetter', 'documents'];
+
+    fileInputs.forEach(id => {
+      const input = document.getElementById(id);
+      input.addEventListener('change', () => {
+        const maxBytes = 5 * 1024 * 1024;
+        const tooLarge = [...input.files].find(file => file.size > maxBytes);
+        if (tooLarge) {
+          statusBox.className = 'form-status warning';
+          statusBox.textContent = `“${tooLarge.name}” is larger than 5 MB. Please choose a smaller file.`;
+          input.value = '';
+        } else {
+          statusBox.className = 'form-status';
+          statusBox.textContent = '';
+        }
+      });
+    });
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      statusBox.className = 'form-status warning';
+      statusBox.textContent = 'This is a front-end demonstration only. Your application has not been sent or stored. To receive real applications, connect this form to a secure backend or approved form service first.';
+      statusBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    form.addEventListener('reset', () => {
+      statusBox.className = 'form-status';
+      statusBox.textContent = '';
+    });
+  </script>
+</body>
+</html>
